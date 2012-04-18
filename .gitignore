@@ -1,0 +1,7 @@
+*.ipr
+*.iws
+*.iml
+.idea/
+common/target/
+web-container/target/
+jboss-as7/target/
