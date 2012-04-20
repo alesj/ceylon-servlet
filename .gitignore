@@ -5,3 +5,5 @@
 common/target/
 web-container/target/
 jboss-as7/target/
+mock/target/
+mock-war/target/

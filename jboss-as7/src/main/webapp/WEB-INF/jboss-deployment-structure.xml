@@ -1,0 +1,9 @@
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <module name="org.jboss.modules"/>
+            <module name="com.redhat.ceylon.module-resolver" slot="0.2"/>
+            <module name="ceylon.runtime"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
