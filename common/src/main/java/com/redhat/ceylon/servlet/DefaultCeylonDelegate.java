@@ -35,15 +35,20 @@ import ceylon.modules.spi.ArgumentType;
  */
 public class DefaultCeylonDelegate implements CeylonDelegate {
     static final String MAIN_MODULE = "ceylon-main-module";
+    static final String MAIN_RUNNABLE = "ceylon-main-runnable";
+    static final String CEYLON_REPO = "ceylon-repository";
 
     private ServletRuntime runtime;
 
     public void init(ServletConfig config) throws ServletException {
         try {
-            final String module = config.getInitParameter(MAIN_MODULE);
             Configuration configuration = new Configuration();
-            configuration.module = module;
-            String ceylonRepo = new File(System.getProperty("jboss.home.dir"), "ceylon-repo").toURI().toString();
+            configuration.module = config.getInitParameter(MAIN_MODULE);
+            configuration.run = config.getInitParameter(MAIN_RUNNABLE);
+            String ceylonRepo = config.getInitParameter(CEYLON_REPO);
+            if (ceylonRepo == null) {
+                ceylonRepo = new File(System.getProperty("jboss.home.dir"), "ceylon-repo").toURI().toString();
+            }
             configuration.setArgument(Argument.REPOSITORY.toString(), ArgumentType.CEYLON, new String[]{ceylonRepo}, -1);
 
             runtime = new ServletRuntime();

@@ -39,6 +39,7 @@ import org.jboss.modules.ModuleLoader;
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
 class ServletRuntime extends JBossRuntime implements CeylonDelegate {
+    private Logger log = Logger.getLogger(getClass().getName());
     private Configuration configuration;
     private String moduleName;
     private ClassLoader classLoader;
@@ -100,6 +101,8 @@ class ServletRuntime extends JBossRuntime implements CeylonDelegate {
             } catch (Exception e) {
                 throw new ServletException(e);
             }
+        } else {
+            log.fine("Method \"" + methodName + "\" not supported.");
         }
         return (method != null);
     }
