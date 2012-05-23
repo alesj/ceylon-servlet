@@ -2,7 +2,7 @@
     <deployment>
         <dependencies>
             <module name="org.jboss.modules"/>
-            <module name="com.redhat.ceylon.module-resolver" slot="0.2"/>
+            <module name="com.redhat.ceylon.module-resolver" slot="0.3"/>
             <module name="ceylon.runtime"/>
         </dependencies>
     </deployment>
