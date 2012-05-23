@@ -47,14 +47,14 @@ public class DefaultCeylonDelegate implements CeylonDelegate {
             configuration.module = config.getInitParameter(MAIN_MODULE);
             configuration.run = config.getInitParameter(MAIN_RUNNABLE);
             String ceylonRuntimeRepo = config.getInitParameter(CEYLON_RUNTIME_REPO);
-            ceylonRuntimeRepo = XmlVariableReplace.repalceVar(ceylonRuntimeRepo);
+            ceylonRuntimeRepo = XmlVariableReplace.replaceVar(ceylonRuntimeRepo);
             if (ceylonRuntimeRepo == null) {
                 ceylonRuntimeRepo = new File(System.getProperty("jboss.home.dir"), "ceylon-repo").toURI().toString();
             }
             configuration.setArgument(Argument.REPOSITORY.toString(), ArgumentType.CEYLON, new String[]{ceylonRuntimeRepo}, -1);
 
             String ceylonRepo = config.getInitParameter(CEYLON_REPO);
-            ceylonRepo = XmlVariableReplace.repalceVar(ceylonRepo);
+            ceylonRepo = XmlVariableReplace.replaceVar(ceylonRepo);
 
             if (ceylonRepo != null) {
                 System.setProperty(CEYLON_REPO, ceylonRepo);

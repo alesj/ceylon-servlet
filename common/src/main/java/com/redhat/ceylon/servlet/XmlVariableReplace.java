@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class XmlVariableReplace {
 
     //Workaround as AS 7.1.0 does not replace all variables from xml
-    public static String repalceVar(String string) {
+    public static String replaceVar(String string) {
         Matcher m = Pattern.compile("\\$\\{(.*?)\\}").matcher(string);
         while (m.find()) {
             String var = m.group(1);
