@@ -14,6 +14,18 @@
             <param-name>ceylon-main-module</param-name>
             <param-value>${ceylon-main-module}</param-value>
         </init-param>
+        <init-param>
+            <param-name>ceylon-main-runnable</param-name>
+            <param-value>${ceylon-main-runnable}</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ceylon-runtime-repository</param-name>
+            <param-value>${jboss.home.dir}ceylon-repo</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ceylon.repo</param-name>
+            <param-value>~/.ceylon</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>

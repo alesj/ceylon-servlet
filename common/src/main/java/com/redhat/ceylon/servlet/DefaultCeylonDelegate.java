@@ -37,15 +37,22 @@ public class DefaultCeylonDelegate implements CeylonDelegate {
     static final String MAIN_MODULE = "ceylon-main-module";
     static final String MAIN_RUNNABLE = "ceylon-main-runnable";
     static final String CEYLON_REPO = "ceylon.repo";
-    static final String CEYLON_RUNTIME_REPO = "ceylon-repository";
+    static final String CEYLON_RUNTIME_REPO = "ceylon-runtime-repository";
 
     private ServletRuntime runtime;
 
     public void init(ServletConfig config) throws ServletException {
         try {
             Configuration configuration = new Configuration();
-            configuration.module = config.getInitParameter(MAIN_MODULE);
-            configuration.run = config.getInitParameter(MAIN_RUNNABLE);
+
+            String mainModule = config.getInitParameter(MAIN_MODULE);
+            mainModule = XmlVariableReplace.replaceVar(mainModule);
+            configuration.module = mainModule;
+
+            String mainRunnable = config.getInitParameter(MAIN_RUNNABLE);
+            mainRunnable = XmlVariableReplace.replaceVar(mainRunnable);
+            configuration.run = mainRunnable;
+
             String ceylonRuntimeRepo = config.getInitParameter(CEYLON_RUNTIME_REPO);
             ceylonRuntimeRepo = XmlVariableReplace.replaceVar(ceylonRuntimeRepo);
             if (ceylonRuntimeRepo == null) {
