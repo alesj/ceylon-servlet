@@ -36,20 +36,36 @@ import ceylon.modules.spi.ArgumentType;
 public class DefaultCeylonDelegate implements CeylonDelegate {
     static final String MAIN_MODULE = "ceylon-main-module";
     static final String MAIN_RUNNABLE = "ceylon-main-runnable";
-    static final String CEYLON_REPO = "ceylon-repository";
+    static final String CEYLON_REPO = "ceylon.repo";
+    static final String CEYLON_RUNTIME_REPO = "ceylon-runtime-repository";
 
     private ServletRuntime runtime;
 
     public void init(ServletConfig config) throws ServletException {
         try {
             Configuration configuration = new Configuration();
-            configuration.module = config.getInitParameter(MAIN_MODULE);
-            configuration.run = config.getInitParameter(MAIN_RUNNABLE);
-            String ceylonRepo = config.getInitParameter(CEYLON_REPO);
-            if (ceylonRepo == null) {
-                ceylonRepo = new File(System.getProperty("jboss.home.dir"), "ceylon-repo").toURI().toString();
+
+            String mainModule = config.getInitParameter(MAIN_MODULE);
+            mainModule = XmlVariableReplace.replaceVar(mainModule);
+            configuration.module = mainModule;
+
+            String mainRunnable = config.getInitParameter(MAIN_RUNNABLE);
+            mainRunnable = XmlVariableReplace.replaceVar(mainRunnable);
+            configuration.run = mainRunnable;
+
+            String ceylonRuntimeRepo = config.getInitParameter(CEYLON_RUNTIME_REPO);
+            ceylonRuntimeRepo = XmlVariableReplace.replaceVar(ceylonRuntimeRepo);
+            if (ceylonRuntimeRepo == null) {
+                ceylonRuntimeRepo = new File(System.getProperty("jboss.home.dir"), "ceylon-repo").toURI().toString();
             }
-            configuration.setArgument(Argument.REPOSITORY.toString(), ArgumentType.CEYLON, new String[]{ceylonRepo}, -1);
+            configuration.setArgument(Argument.REPOSITORY.toString(), ArgumentType.CEYLON, new String[]{ceylonRuntimeRepo}, -1);
+
+            String ceylonRepo = config.getInitParameter(CEYLON_REPO);
+            ceylonRepo = XmlVariableReplace.replaceVar(ceylonRepo);
+
+            if (ceylonRepo != null) {
+                System.setProperty(CEYLON_REPO, ceylonRepo);
+            }
 
             runtime = new ServletRuntime();
             runtime.execute(configuration);

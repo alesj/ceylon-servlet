@@ -23,7 +23,7 @@
     </modules>
 
     <properties>
-        <version.ceylon.language>0.2</version.ceylon.language>
+        <version.ceylon.language>0.3</version.ceylon.language>
         <version.ceylon.cmr>1.0.0-SNAPSHOT</version.ceylon.cmr>
         <version.ceylon.runtime>1.0.0-SNAPSHOT</version.ceylon.runtime>
         <version.javax.servlet>3.0.1</version.javax.servlet>
